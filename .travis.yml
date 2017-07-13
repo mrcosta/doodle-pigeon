@@ -5,3 +5,4 @@ jdk:
 after_success:
   - ./gradlew jacocoTestReport
   - bash <(curl -s https://codecov.io/bash)
+  - sh travis/deploy_dockerhub.sh
