@@ -14,6 +14,6 @@ public class HelloBootController {
     @RequestMapping("/hi")
     public String sayHi() {
         logger.info("hello booter");
-        return "hi";
+        return "hello";
     }
 }

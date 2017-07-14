@@ -15,7 +15,7 @@ public class HelloBootControllerTest {
 
     @Test
     public void shouldSayHi() {
-        assertThat(new HelloBootController().sayHi(), is("hi"));
+        assertThat(new HelloBootController().sayHi(), is("hello"));
         this.outputCapture.expect(containsString("hello"));
     }
 }

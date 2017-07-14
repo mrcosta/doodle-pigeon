@@ -11,13 +11,15 @@ jobs:
   include:
     - stage: run tests
       script:
-      - docker-compose run test ./gradlew clean test
-      - docker-compose run test ./gradlew integrationTest
+        - docker-compose run test ./gradlew clean test
+        - docker-compose run test ./gradlew integrationTest
     - stage: build
       script: docker-compose run test ./gradlew bootRepackage
-
-after_success:
-  - ./gradlew jacocoTestReport
-  - bash <(curl -s https://codecov.io/bash)
-  - sh travis/deploy_dockerhub.sh
-  - test “$TRAVIS_BRANCH” = “master” && sh travis/deploy_heroku.sh
+    - stage: generate and upload test coverage
+      script:
+        - ./gradlew jacocoTestReport
+        - bash <(curl -s https://codecov.io/bash)
+    - stage: upload image and deploy to heroku
+      script:
+        - sh travis/deploy_dockerhub.sh
+        - test “$TRAVIS_BRANCH” = “master” && sh travis/deploy_heroku.sh

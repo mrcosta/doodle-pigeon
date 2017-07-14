@@ -26,6 +26,6 @@ public class HelloBootControllerIntegrationTest {
     public void shouldSayHi() throws Exception {
         mvc.perform(get("/hi").accept(APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().string(equalTo("hi")));
+                .andExpect(content().string(equalTo("hello")));
     }
 }
