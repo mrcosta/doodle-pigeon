@@ -7,10 +7,14 @@ language: java
 jdk:
   - oraclejdk8
 
-script:
-  - ./gradlew clean test
-  - ./gradlew integrationTest
-  - ./gradlew bootRepackage
+jobs:
+  include:
+    - stage: run tests
+      script:
+      - docker-compose run test ./gradlew clean test
+      - docker-compose run test ./gradlew integrationTest
+    - stage: build
+      script: docker-compose run test ./gradlew bootRepackage
 
 after_success:
   - ./gradlew jacocoTestReport
